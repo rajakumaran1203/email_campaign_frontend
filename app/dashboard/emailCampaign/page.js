@@ -19,11 +19,11 @@ const EmailCampaign = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/template").then((res) => {
+    axios.get("https://emailcampigns.adaptable.app/templates").then((res) => {
       setTemplates(res.data);
     });
 
-    axios.get("http://localhost:3001/api/emailList").then((res) => {
+    axios.get("https://emailcampigns.adaptable.app/emailLists").then((res) => {
       SetEmailOptions(res.data);
     });
 
@@ -46,7 +46,7 @@ const EmailCampaign = () => {
 
   const handleSaveTemplateData = ({ name, subject, description }) => {
     axios
-      .post("http://localhost:3001/api/template", {
+      .post("https://emailcampigns.adaptable.app/templates/create", {
         name: name,
         subject: subject,
         description: description,
@@ -66,7 +66,7 @@ const EmailCampaign = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/api/email", {
+      const response = await fetch("https://emailcampigns.adaptable.app/email/send-email", {
         method: "POST",
         headers: {
           "content-type": "application/json",
