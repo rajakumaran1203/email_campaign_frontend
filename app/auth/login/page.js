@@ -28,6 +28,7 @@ const Login = () => {
     try {
       const response = await axios.post('https://emailcampigns.adaptable.app/user/login', {
         headers: {
+          'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
         email,
