@@ -20,7 +20,7 @@ const SignUp = () => {
     e.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:3001/api/user/signup', {
+      const response = await axios.post('https://emailcampigns.adaptable.app/user/signup', {
         firstName,
         lastName,
         email,
