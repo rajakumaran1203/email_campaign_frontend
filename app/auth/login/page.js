@@ -28,7 +28,7 @@ const Login = () => {
     try {
       const response = await axios.post('https://emailcampigns.adaptable.app/user/login', {
         headers: {
-          'Access-Control-Allow-Origin': 'https://658457de17dc8b0009b0e24c--friendly-halva-89d6cc.netlify.app',
+          'Access-Control-Allow-Origin': 'https://master--friendly-halva-89d6cc.netlify.app/',
         },
         email,
         password,
