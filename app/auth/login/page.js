@@ -8,8 +8,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import { formatDate } from '@/app/utils/helper';
 import { setAuthToken } from '@/app/utils/auth';
 
-
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,6 +27,9 @@ const Login = () => {
     
     try {
       const response = await axios.post('https://emailcampigns.adaptable.app/user/login', {
+        headers: {
+          'Access-Control-Allow-Origin': 'https://658457de17dc8b0009b0e24c--friendly-halva-89d6cc.netlify.app',
+        },
         email,
         password,
       });
