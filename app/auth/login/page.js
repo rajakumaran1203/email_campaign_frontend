@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('http://localhost:3001/api/user/login', {
+      const response = await axios.post('https://emailcampigns.adaptable.app/user/login', {
         email,
         password,
       });
