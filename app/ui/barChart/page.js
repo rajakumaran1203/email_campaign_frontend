@@ -9,9 +9,9 @@ const BarChart = ({ data }) => {
     if (!data || data.length === 0) return;
 
     const svg = d3.select(svgRef.current);
-    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+    const margin = { top: 20, right: 0, bottom: 20, left: 40 };
     const width = 600 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const height = 300 - margin.top - margin.bottom;
 
     const x = d3
       .scaleBand()
@@ -36,7 +36,7 @@ const BarChart = ({ data }) => {
       .attr('y', (d) => y(d.count))
       .attr('width', x.bandwidth())
       .attr('height', (d) => height - margin.bottom - y(d.count))
-      .attr('fill', 'steelblue');
+      .attr('fill', '#0041A3');
 
     svg
       .append('g')
@@ -51,7 +51,7 @@ const BarChart = ({ data }) => {
   }, [data]);
 
   return (
-    <svg className='p-8  bg-fadedBg mx-auto' ref={svgRef} width={600} height={400}></svg>
+    <svg className='p-2 mx-auto email-account-card-shadow border   border-borderColor rounded-md' ref={svgRef} width={600} height={300}></svg>
   );
 };
 

@@ -9,9 +9,9 @@ const LineChart = ({ data }) => {
     if (!data || data.length === 0) return;
 
     const svg = d3.select(svgRef.current);
-    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-    const width = 1200 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const margin = { top: 20, right: 0, bottom: 20, left: 40 };
+    const width = 800 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
 
     const x = d3
       .scaleTime()
@@ -44,14 +44,14 @@ const LineChart = ({ data }) => {
       .append('path')
       .datum(data)
       .attr('fill', 'none')
-      .attr('stroke', 'steelblue')
+      .attr('stroke', '#0041A3')
       .attr('stroke-width', 1.5)
       .attr('d', line);
 
   }, [data]);
 
   return (
-    <svg className='p-4 bg-fadedBg mx-auto' ref={svgRef} width={1200} height={400}></svg>
+    <svg className='p-2 mx-auto email-account-card-shadow border border-borderColor rounded-md' ref={svgRef} width={800} height={300}></svg>
   );
 };
 
