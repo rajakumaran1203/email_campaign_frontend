@@ -4,22 +4,29 @@ import Link from 'next/link'
 import axios from 'axios'
 import CheckBox from "@mui/material/Checkbox";
 
-import { emailAccountsData } from '@/constants';
+// import { emailAccountsData } from '@/constants';
 import DashboardHeader from '@/app/ui/dashboard/dashboardHeader/page'
 import EmailAccountCard from '@/app/ui/dashboard/emailAccountCard/page'
 import EmailCardShimmer from '@/app/ui/dashboard/shimmer/page';
 
 const EmailAccounts = () => {
-  // const [emailAccountsData , setEmailAccountsData] = useState([])
+  const [emailAccountsData , setEmailAccountsData] = useState([])
   const [selectedAccounts, setSelectedAccounts] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
 
 
+  // useEffect(() => {
+  //   // axios.get("http://localhost:3000/email/details").then((res) => {
+  //   //   setEmailAccountsData(res.data)
+  //   // })
+  // },[])
+
   useEffect(() => {
-    // axios.get("http://localhost:3001/api/emailAccounts").then((res) => {
-    //   setEmailAccountsData(res.data)
-    // })
-  },[])
+    axios.get("https://email-campaign.onrender.com/email/details").then((res) => {
+      setEmailAccountsData(res.data);
+    });
+  }, [emailAccountsData]);
+
  
   const handleAddNew = () => {
     

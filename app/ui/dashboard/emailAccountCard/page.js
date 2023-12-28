@@ -52,7 +52,7 @@ const EmailAccountCard = ({
       </div>
       <div className="flex items-center justify-between  min-w-[20%]">
         <div>
-          {emailSent}  <span>  of 50</span>
+          {emailSent}  <span>  of {warmupEmailSent}</span>
         </div>
         <div>{warmupEmailSent}</div>
       </div>
