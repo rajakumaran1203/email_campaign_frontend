@@ -47,14 +47,12 @@ const Login = () => {
           router.push('/dashboard');
         }, 1000);
       } else {
-        console.log("33333");
         toast.error('Login failed: Invalid user or password'); 
         setEmail('');
         setPassword('');
         setIsLoginError(true)
       }
     } catch (error) {
-      console.log("44444");
       toast.error('Uh-oh! Incorrect credentials. Retry!');
       setIsLoginError(true)
       setEmail('');
