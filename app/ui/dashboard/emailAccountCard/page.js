@@ -14,6 +14,8 @@ const EmailAccountCard = ({
   emailAddress,
   emailSent,
   warmupEmailSent,
+  Seen,
+  Unseen,
   isWarmUpOn,
   isSelected,
   handleCardSelection
@@ -50,11 +52,13 @@ const EmailAccountCard = ({
         />
         <p className="px-2">{emailAddress}</p>
       </div>
-      <div className="flex items-center justify-between  min-w-[20%]">
+      <div className="flex flex-1 items-center justify-between  min-w-[20%]">
         <div>
-          {emailSent}  <span>  of {warmupEmailSent}</span>
+          {warmupEmailSent}  <span>  of {emailSent}</span>
         </div>
-        <div>{warmupEmailSent}</div>
+        <div>{emailSent}</div>
+        <div>{Seen}</div>
+        <div>{Unseen}</div>
       </div>
       <div className="flex items-center justify-end space-x-8 min-w-[30%]">
         <BootstrapTooltip title={isOn ? 'pause warmup' : 'resume warmup'} placement="top">

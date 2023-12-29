@@ -15,12 +15,6 @@ const EmailAccounts = () => {
   const [selectAllChecked, setSelectAllChecked] = useState(false);
 
 
-  // useEffect(() => {
-  //   // axios.get("http://localhost:3000/email/details").then((res) => {
-  //   //   setEmailAccountsData(res.data)
-  //   // })
-  // },[])
-
   useEffect(() => {
     axios.get("https://email-campaign.onrender.com/email/details").then((res) => {
       setEmailAccountsData(res.data);
@@ -69,11 +63,13 @@ const EmailAccounts = () => {
           <CheckBox onChange={handleSelectAll} checked={selectAllChecked} />
           <p>NAME</p>
         </div>
-        <div className='flex items-center justify-between min-w-[20%]'>
-          <p>EMAIL SENT</p>
-          <p className='-mr-12'>WARMUP EMAIL SENT</p>
+        <div className='flex-1 flex items-center justify-between min-w-[20%]'>
+          <p>BOUNCE EMAIL</p>
+          <p className=''>WARMUP EMAIL SENT</p>
+          <p>SEEN</p>
+          <p className='ml-12'>UNSEEN</p>
         </div>
-        <div className='flex items-center justify-end space-x-8 min-w-[30%]'>{""}</div>
+        <div className='flex items-center justify-end space-x-8 min-w-[29%]'>{""}</div>
       </header>
         {emailAccountsData ? emailAccountsData.map((item) => {
           return <EmailAccountCard key={item.emailAddress} {...item} isSelected={selectedAccounts.includes(item.emailAddress)} handleCardSelection={handleCardSelection} />
