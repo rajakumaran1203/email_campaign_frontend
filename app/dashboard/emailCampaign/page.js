@@ -1,167 +1,63 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+'use client'
+import DashboardHeader from '@/app/ui/dashboard/dashboardHeader/page';
+import EmailAccountCard from '@/app/ui/dashboard/emailAccountCard/page';
+import { EmailCardShimmer } from '@/app/ui/dashboard/shimmer/page';
+import PrimaryButton from '@/app/ui/primaryButton/page';
+import { backendBaseUrl } from '@/constants';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
-import SaveTemplate from "@/app/ui/dashboard/saveTemplate/saveTemplate";
-import DashboardHeader from "@/app/ui/dashboard/dashboardHeader/page";
-import PrimaryButton from "@/app/ui/primaryButton/page";
-import SelectEmails from "@/app/ui/dashboard/selectEmails/page";
+
 
 const EmailCampaign = () => {
-  const [selectedEmailValues, setSelectedEmailValues] = useState([]);
-  const [emailOptions , SetEmailOptions] = useState([])
-  const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
-  const [templates, setTemplates] = useState(null);
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const router = useRouter()
+  const [isLoading , setIsLoading] = useState(true)
+  const [campaigns,setCampaigns] = useState([])
+
+  // useEffect(() =>{
+  //   axios.get(`${backendBaseUrl}/email/campaigns`)
+  //   .then((res) => { 
+  //     setCampaigns(res.data)
+  //     setIsLoading(false)
+  //   })
+  // },[])
 
 
+  const handleAddCampaign = () => {
+   router.push('/dashboard/emailCampaign/addCampaign')
+  }
 
-  useEffect(() => {
-    axios.get("https://email-campaign.onrender.com/templates").then((res) => {
-      setTemplates(res.data);
-    });
-
-    axios.get("https://email-campaign.onrender.com/emailLists").then((res) => {
-      SetEmailOptions(res.data);
-    });
-
-    
-
-  }, [showModal, templates]);
-
-  const handleSelectTemplate = (template) => {
-    setSelectedTemplate(template);
-
-    if (template) {
-      setSubject(template.subject || "");
-      setBody(template.description || "");
-    }
-  };
-
-  const handleSaveTemplate = () => {
-    setShowModal(true);
-  };
-
-  const handleSaveTemplateData = ({ name, subject, description }) => {
-    axios
-      .post("https://email-campaign.onrender.com/templates/create", {
-        name: name,
-        subject: subject,
-        description: description,
-      })
-      .then(() => console.log(name, subject, description));
-    setShowModal(false);
-  };
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      to: selectedEmailValues,
-      subject: subject,
-      text: body,
-    };
-
-    try {
-      const response = await fetch("https://email-campaign-lnfx.onrender.com/email/send-email", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        alert("email sent successfully");
-        setSelectedEmailValues([])
-        setSubject('')
-        setBody('')
-      } else {
-        console.log("error fetching data");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  return (
-    <div className="min-w-[88%] h-full m-auto  space-y-6">
-      <DashboardHeader heading={"Compose Email"} />
-      <form onSubmit={handleSubmit} className="w-full space-y-10 relative px-16 py-6 solid">
-        <div className="w-full  flex justify-between items-center">
-          <SelectEmails selectedValues={selectedEmailValues} setSelectedValues={setSelectedEmailValues} options={emailOptions} />
-        </div>
-        <div>
-          <input
-            type="text"
-            id="subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            required
-            placeholder="Subject"
-            className="w-full py-4 px-2 rounded-md  outline-blue-200 border border-gray-200"
-          />
-        </div>
-        <div>
-          <textarea
-            id="body"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            required
-            placeholder="Description"
-            className="w-full h-52 py-4 px-2 rounded-md  outline-blue-200 border border-gray-200"
-          />
-        </div>
-        <div>
-          <label htmlFor="template" className="text-lg text-textDark  mr-4">
-            Select Template:
-          </label>
-          <select
-            id="template"
-            className="pr-6 py-4 w-[400px]  rounded-sm outline-none"
-            onChange={(e) =>
-              handleSelectTemplate(
-                templates?.find((template) => template.name === e.target.value)
-              )
-            }
-            value={selectedTemplate ? selectedTemplate.name : {}}
-          >
-            {templates?.map((template) => {
-              return (
-                <option
-                  className="px-4 py-4"
-                  key={template.name}
-                  value={template.name}
-                >
-                  {template.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div>
-          <div className="right-16 bottom-14 absolute space-x-8">
-            <PrimaryButton
-              type={"button"}
-              handleClick={handleSaveTemplate}
-              ButtonName={"Save Template"}
-            />
-            <SaveTemplate
-              isOpen={showModal}
-              onClose={() => setShowModal(false)}
-              onSave={handleSaveTemplateData}
-              subject={subject}
-              body={body}
-            />
-            <PrimaryButton type={"submit"} ButtonName={"Send Email"} />
-          </div>
-        </div>
-      </form>
+  return <div className='w-full' >
+    <DashboardHeader heading={'Email Campaign'} />
+    <div className='w-full flex justify-end px-6  my-4 '>
+      <PrimaryButton ButtonName={'Add Campaign'} handleClick={handleAddCampaign} />
     </div>
-  );
+    <div className='w-full flex flex-col'>
+      <header className="flex justify-between items-center px-8 py-2 mx-4 mb-5  text-xs font-semibold  text-textSoft">
+        <div className='flex gap-3 items-center min-w-[30%]'>
+          <p>NAME</p>
+        </div>
+        <div className='flex-1 flex items-center justify-between min-w-[20%]'>
+          <p>EMAIL SENT</p>
+          <p>OPENED</p>
+          <p className='ml-12'>UNREAD</p>
+          <p>BOUNCED</p>
+        </div>
+        <div className='flex items-center justify-end space-x-8 min-w-[29%]'>{""}</div>
+      </header>
+      {/* {!isLoading ? (
+          Array.from({ length: 2 }).map((_, index) => (
+            <EmailCardShimmer key={index} />
+          ))
+        ) : campaigns.length !== 0 ? (
+          campaigns.map((item) => (
+            <EmailAccountCard key={item.id} {...item} isSelected={selectedAccounts.includes(item.emailAddress)} handleCardSelection={handleCardSelection}/>
+          ))
+        ): <p className='w-fit mx-auto font-bold text-slate-300 text-3xl mt-28'>Add a new campaign ...</p> } */}
+        <p className='w-fit mx-auto font-bold text-slate-300 text-3xl mt-28'>Add a new campaign ...</p>
+      </div>
+  </div>
 };
 
 export default EmailCampaign;

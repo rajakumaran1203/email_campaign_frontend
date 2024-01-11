@@ -58,7 +58,7 @@ const NavbarComponent = ({ handleSideBar, isOpen }) => {
             />
           </svg>
         </div>
-        <div className="text-2xl font-semibold">Logo</div>
+        <div className="text-2xl font-semibold">Isys</div>
       </div>
       <div className="space-x-5 flex hover:cursor-pointer">
         <p className="relative inline-block group ">
@@ -75,11 +75,12 @@ const NavbarComponent = ({ handleSideBar, isOpen }) => {
               aria-expanded={anchorEl ? "true" : undefined}
               onClick={handleClick}
               sx={{
-                padding: "0px",
+                padding: "2px",
                 fontSize: "16px",
                 textTransform: "capitalize",
                 fontWeight: 400,
-                color:'black'
+                color:'black',
+                minWidth:'100px'
               }}
             >
               {localStorageUser}

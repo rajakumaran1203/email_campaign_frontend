@@ -10,7 +10,7 @@ const BarChart = ({ data }) => {
 
     const svg = d3.select(svgRef.current);
     const margin = { top: 20, right: 0, bottom: 20, left: 40 };
-    const width = 600 - margin.left - margin.right;
+    const width = 550 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
     const x = d3
@@ -51,7 +51,7 @@ const BarChart = ({ data }) => {
   }, [data]);
 
   return (
-    <svg className='p-2 mx-auto email-account-card-shadow border   border-borderColor rounded-md' ref={svgRef} width={600} height={300}></svg>
+    <svg className='p-2 mx-auto email-account-card-shadow border   border-borderColor rounded-md' ref={svgRef} width={550} height={300}></svg>
   );
 };
 
