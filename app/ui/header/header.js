@@ -7,7 +7,7 @@ const Header = () => {
   
   return (
       <header className="w-full h-20 py-3 px-12 bg-slate-50 flex items-center justify-between shadow-sm fixed top-0">
-        <div className='font-bold ml-4 text-3xl text-primary cursor-pointer' >Logo</div>
+        <div className='font-bold ml-4 text-3xl text-primary cursor-pointer' >Isys</div>
         <ul className="flex gap-12 text-[17px]">
           <li className='p-2 relative inline-block group'>
             <Link href="#section1"> Products</Link>
