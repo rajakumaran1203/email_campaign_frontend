@@ -62,7 +62,7 @@ const Login = () => {
   return (
     <div className='min-h-screen'>
     <div className='flex justify-between px-6 py-4'>
-        <p className='text-primary text-2xl font-bold'>logo</p>
+        <p className='text-primary text-2xl font-bold'>Isys</p>
         <Link href={'/'}>
         <div className='hover:cursor-pointer rounded-md hover:bg-fadedBg p-2'><Home /></div>
         </Link>
